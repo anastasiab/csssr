@@ -1,6 +1,7 @@
 package ru.test;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,11 +15,12 @@ public class CsssrTest {
                 collect(Collectors.groupingBy(a -> a.charAt(0))).
                 entrySet().stream().
                 filter(b -> b.getValue().size() > 1).
+                peek(v -> v.getValue().sort((str1, str2) -> str2.length() - str1.length())).
                 collect(toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     public static void main(String[] args) {
-        String s = "сапог сарай арбуз болт бокс биржа";
+        String s = "сапог сарай арбуз болт боксинг бокс биржа";
         System.out.println(new CsssrTest().sort(s));
     }
 }
